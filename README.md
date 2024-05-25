@@ -18,14 +18,12 @@ This repository utilizes Vitest to test TypeScript functions.
 - **Fast:** Uses esbuild to compile ts to js which is 20-30x faster than the standard ts compiler tsc.
 - **Mutli-threading:** Uses multi-thread to run the test using service workers via tinypool which uses the node.js thread pool.
 - **DX:** Out of the box support for es module, typescript, JSX.
-- **Jest Compatability:** Compatible with Jest which was created by Meta.  
-- *Website:*  
-https://vitest.dev/
+- **Jest Compatability:** Compatible with Jest which was created by Meta.
+- *Website:* https://vitest.dev/
 
 ## Motivation for Jest
 - **Popular and Dependable:** A nice JS testing framework with a focus on simplicity.
 - **Isolated:** Tests are parallelized by running them in their own processes to maximize performance
 - **Zero config:** Jest aims to work out of the box, config-free on most JS projects.
-- **Great API:** Jest has the entire toolkit built in one place. Well documented and well maintained.  
-- *Website:*    
-https://jestjs.io/
+- **Great API:** Jest has the entire toolkit built in one place. Well documented and well maintained.
+- *Website:* https://jestjs.io/
