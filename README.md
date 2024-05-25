@@ -1,3 +1,3 @@
-# Unit Testing using Vitest
+# Unit Testing with Vitest
 
-This repository utilizes vitest to test typescript functions.
+This repository utilizes Vitest to test TypeScript functions.
