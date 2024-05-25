@@ -9,23 +9,30 @@ test('add(2, 3) -> 6', () => {
     expect(multiply(2, 3)).toBe(6);
 });
 
-test('[] -> NaN', () => {
+// test('[] -> NaN', () => {
+//     expect(calculateAverage([])).toBe(NaN);
+// });
+
+// test('[1]', () => {
+//     expect(calculateAverage([1])).toBe(1);
+// });
+
+// test('[1, 2, 3]', () => {
+//     expect(calculateAverage([1])).toBe(1);
+// });
+
+// test('[-1, 4, 3]', () => {
+//     expect(calculateAverage([-1, 4, 3])).toBe(2);
+// });
+
+// test('[-1, 4, -3]', () => {
+//     expect(calculateAverage([-1, 4, -3])).toBe(0);
+// });
+
+test('calculateAverage function', () => {
     expect(calculateAverage([])).toBe(NaN);
-});
-
-test('[1]', () => {
     expect(calculateAverage([1])).toBe(1);
-});
-
-test('[1, 2, 3]', () => {
     expect(calculateAverage([1])).toBe(1);
-});
-
-test('[-1, 4, 3]', () => {
     expect(calculateAverage([-1, 4, 3])).toBe(2);
-});
-
-test('[-1, 4, -3]', () => {
     expect(calculateAverage([-1, 4, -3])).toBe(0);
 });
-
