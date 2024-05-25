@@ -13,3 +13,8 @@ This repository utilizes Vitest to test TypeScript functions.
 - **Test Independance and Order:** Ensure that each test is independent and does not rely on the state or behaviour of other tests.
 - **Regularly Review and Update Tests:** Unit tests should be reviewed regularly to ensure they remain accurate, relevant and aligned with the current codebase.
 - **Integration Testing into Your Development Workflow:** Incorporate unit testing into your development process and run tests frequently. Automated testing tools and continuous integration (CI) systems can help execute tests automatically.
+
+## Motivation for Vitest
+- **Fast:** Uses esbuild to compile ts to js which is 20-30x faster than the standard ts compiler tsc.
+- **Mutli-threading:** Uses multi thread to run the test using service workers via tinypool which uses the node.js thread pool.
+- **DX:** Out of the box support for es module, typescript, JSX
