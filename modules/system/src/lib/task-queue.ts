@@ -14,7 +14,7 @@ const taskQueue = {
   enqueue(task: ITask): void {
     //put value on end of queue
     queue.push(task);
-    save();
+    // save();
   },
 
   /* --- take first task from queue head
@@ -27,13 +27,17 @@ const taskQueue = {
   */
   dequeue(): ITask | undefined {
     const firstTask = queue.shift();
-    save();
+    // save();
     return firstTask;
   },
 
   length() : number{
     return queue.length;
-  }
+  },
+
+  clear() : void {
+    queue.length = 0;
+  },
 };
 
 export default taskQueue;
@@ -42,9 +46,9 @@ export default taskQueue;
 
 const queue: ITask[] = load();
 
-function save(): void {
-  persist.save(queue);
-}
+// function save(): void {
+//   persist.save(queue);
+// }
 
 function load(): ITask[] {
   return persist.load();
