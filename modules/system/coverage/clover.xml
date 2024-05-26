@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1716760013356" clover="3.2.0">
+  <project timestamp="1716760013356" name="All files">
+    <metrics statements="14" coveredstatements="12" conditionals="2" coveredconditionals="1" methods="7" coveredmethods="6" elements="23" coveredelements="19" complexity="0" loc="14" ncloc="14" packages="1" files="2" classes="2"/>
+    <file name="persistence.ts" path="/Users/stevenduong/unit-testing-typescript/modules/system/src/lib/persistence.ts">
+      <metrics statements="6" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
+      <line num="5" count="1" type="stmt"/>
+      <line num="6" count="1" type="stmt"/>
+      <line num="9" count="0" type="stmt"/>
+      <line num="10" count="0" type="stmt"/>
+      <line num="14" count="1" type="stmt"/>
+      <line num="15" count="1" type="cond" truecount="1" falsecount="1"/>
+    </file>
+    <file name="task-queue.ts" path="/Users/stevenduong/unit-testing-typescript/modules/system/src/lib/task-queue.ts">
+      <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="5"/>
+      <line num="5" count="1" type="stmt"/>
+      <line num="16" count="4" type="stmt"/>
+      <line num="29" count="1" type="stmt"/>
+      <line num="31" count="1" type="stmt"/>
+      <line num="35" count="6" type="stmt"/>
+      <line num="39" count="4" type="stmt"/>
+      <line num="47" count="1" type="stmt"/>
+      <line num="54" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>
