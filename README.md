@@ -27,3 +27,10 @@ This repository utilizes Vitest to test TypeScript functions.
 - **Zero config:** Jest aims to work out of the box, config-free on most JS projects.
 - **Great API:** Jest has the entire toolkit built in one place. Well documented and well maintained.
 - *Website:* https://jestjs.io/
+
+## Code Coverage
+- Code coverage is a software metric for measuring the percentage of code that is executed by test cases during software testing.
+- Helps to identify untested areas in the code, potentially revealing bugs or logic errors.
+- High code coverage is desirable, but it does not guarantee the absence of bugs; comprehensive test cases are essential for reliable software.
+- 100% code coverage is a desirable goal, but not always practical.
+
