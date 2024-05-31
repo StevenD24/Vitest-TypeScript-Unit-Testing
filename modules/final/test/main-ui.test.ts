@@ -1,6 +1,6 @@
 import { test, expect, beforeEach } from "vitest";
-import { createDom, registerHandlers } from "../src/ui/main-ui";
-import { ButtonsText, getEnumKeyValues } from "./test-utils";
+import { SCHEDULER_INTERVAL_SEC, createDom, registerHandlers } from "../src/ui/main-ui";
+import { ButtonsText, getButtonInUI, getEnumKeyValues, pauseMs } from "./test-utils";
 
 let appElem: HTMLElement;
 
@@ -34,7 +34,7 @@ test('The first button has correct text', () => {
     expect(firstButton?.textContent).toBe('start scheduler');
 });
 
-test('all buttons has correct text', () => {
+test('all buttons have the correct text', () => {
     const arrayButtonsKeyValue = getEnumKeyValues(ButtonsText);
     const buttons = appElem.querySelectorAll('button');
 
@@ -43,4 +43,13 @@ test('all buttons has correct text', () => {
     arrayButtonsKeyValue.forEach((bt, i) => {
         expect(bt.value).toBe(buttons[i].textContent);
     });
+});
+
+test('click on add -> 3 appears in the output', async () => {
+    getButtonInUI(ButtonsText.EnqueueAdd)!.click();
+    getButtonInUI(ButtonsText.StartScheduler)!.click();
+
+    const outputElem = appElem.querySelector('output');
+    await pauseMs(SCHEDULER_INTERVAL_SEC*1000*2);
+    expect(outputElem?.textContent?.includes('3')).toBeTruthy();
 });
