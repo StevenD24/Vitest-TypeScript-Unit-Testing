@@ -15,12 +15,15 @@ importers:
       '@sinonjs/fake-timers':
         specifier: ^11.0.0
         version: 11.0.0
+      '@types/node':
+        specifier: ^20.12.13
+        version: 20.12.13
       '@types/sinonjs__fake-timers':
         specifier: ^8.1.2
         version: 8.1.2
       '@vitest/coverage-istanbul':
         specifier: ^0.33.0
-        version: 0.33.0(vitest@0.31.0)
+        version: 0.33.0(vitest@0.31.0(jsdom@22.0.0))
       jsdom:
         specifier: ^22.0.0
         version: 22.0.0
@@ -29,7 +32,7 @@ importers:
         version: 5.0.2
       vite:
         specifier: ^4.3.2
-        version: 4.3.2(@types/node@20.4.0)
+        version: 4.3.2(@types/node@20.12.13)
       vitest:
         specifier: ^0.31.0
         version: 0.31.0(jsdom@22.0.0)
@@ -304,8 +307,8 @@ packages:
   '@types/chai@4.3.5':
     resolution: {integrity: sha512-mEo1sAde+UCE6b2hxn332f1g1E8WfYRu6p5SvTKr2ZKC1f7gFJXk4h5PyGP9Dt6gCaG8y8XhwnXWC6Iy2cmBng==}
 
-  '@types/node@20.4.0':
-    resolution: {integrity: sha512-jfT7iTf/4kOQ9S7CHV9BIyRaQqHu67mOjsIQBC3BKZvzvUB6zLxEwJ6sBE3ozcvP8kF6Uk5PXN0Q+c0dfhGX0g==}
+  '@types/node@20.12.13':
+    resolution: {integrity: sha512-gBGeanV41c1L171rR7wjbMiEpEI/l5XFQdLLfhr/REwpgDy/4U8y89+i8kRiLzDyZdOkXh+cRaTetUnCYutoXA==}
 
   '@types/sinonjs__fake-timers@8.1.2':
     resolution: {integrity: sha512-9GcLXF0/v3t80caGs5p2rRfkB+a8VBGLJZVih6CNFkx8IZ994wiKKLSRs9nuFwk1HevWs/1mnUmkApGrSGsShA==}
@@ -798,6 +801,9 @@ packages:
   ufo@1.1.2:
     resolution: {integrity: sha512-TrY6DsjTQQgyS3E3dBaOXf0TpPD8u9FVrVYmKVegJuFw51n/YB9XPt+U6ydzFG5ZIN7+DIjPbNmXoBj9esYhgQ==}
 
+  undici-types@5.26.5:
+    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+
   universalify@0.2.0:
     resolution: {integrity: sha512-CJ1QgKmNg3CwvAv/kOFmtnEN05f0D/cn9QntgNOQlQF9dgvVTHj3t+8JPdjqawCHk7V/KA+fbUqzZ9XWhcqPUg==}
     engines: {node: '>= 4.0.0'}
@@ -1174,11 +1180,13 @@ snapshots:
 
   '@types/chai@4.3.5': {}
 
-  '@types/node@20.4.0': {}
+  '@types/node@20.12.13':
+    dependencies:
+      undici-types: 5.26.5
 
   '@types/sinonjs__fake-timers@8.1.2': {}
 
-  '@vitest/coverage-istanbul@0.33.0(vitest@0.31.0)':
+  '@vitest/coverage-istanbul@0.33.0(vitest@0.31.0(jsdom@22.0.0))':
     dependencies:
       istanbul-lib-coverage: 3.2.0
       istanbul-lib-instrument: 5.2.1
@@ -1686,6 +1694,8 @@ snapshots:
 
   ufo@1.1.2: {}
 
+  undici-types@5.26.5: {}
+
   universalify@0.2.0: {}
 
   update-browserslist-db@1.0.11(browserslist@4.21.9):
@@ -1699,14 +1709,14 @@ snapshots:
       querystringify: 2.2.0
       requires-port: 1.0.0
 
-  vite-node@0.31.0(@types/node@20.4.0):
+  vite-node@0.31.0(@types/node@20.12.13):
     dependencies:
       cac: 6.7.14
       debug: 4.3.4
       mlly: 1.4.0
       pathe: 1.1.1
       picocolors: 1.0.0
-      vite: 4.3.2(@types/node@20.4.0)
+      vite: 4.3.2(@types/node@20.12.13)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -1716,20 +1726,20 @@ snapshots:
       - supports-color
       - terser
 
-  vite@4.3.2(@types/node@20.4.0):
+  vite@4.3.2(@types/node@20.12.13):
     dependencies:
-      '@types/node': 20.4.0
       esbuild: 0.17.19
       postcss: 8.4.25
       rollup: 3.26.2
     optionalDependencies:
+      '@types/node': 20.12.13
       fsevents: 2.3.2
 
   vitest@0.31.0(jsdom@22.0.0):
     dependencies:
       '@types/chai': 4.3.5
       '@types/chai-subset': 1.3.3
-      '@types/node': 20.4.0
+      '@types/node': 20.12.13
       '@vitest/expect': 0.31.0
       '@vitest/runner': 0.31.0
       '@vitest/snapshot': 0.31.0
@@ -1741,7 +1751,6 @@ snapshots:
       chai: 4.3.7
       concordance: 5.0.4
       debug: 4.3.4
-      jsdom: 22.0.0
       local-pkg: 0.4.3
       magic-string: 0.30.1
       pathe: 1.1.1
@@ -1750,9 +1759,11 @@ snapshots:
       strip-literal: 1.0.1
       tinybench: 2.5.0
       tinypool: 0.5.0
-      vite: 4.3.2(@types/node@20.4.0)
-      vite-node: 0.31.0(@types/node@20.4.0)
+      vite: 4.3.2(@types/node@20.12.13)
+      vite-node: 0.31.0(@types/node@20.12.13)
       why-is-node-running: 2.2.2
+    optionalDependencies:
+      jsdom: 22.0.0
     transitivePeerDependencies:
       - less
       - sass
