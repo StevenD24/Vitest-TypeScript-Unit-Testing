@@ -10,5 +10,8 @@ test('map empty -> dispatch throw', () => {
         action: "action1",
         payload: {}
     }
+    map.set("action2", () => {
+        return {status : 'failure', result: {} };
+    });
     expect(() => oTaskDispatcher.dispatch(task1)).toThrowError();
 });
