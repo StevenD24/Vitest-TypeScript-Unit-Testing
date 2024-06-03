@@ -1,6 +1,8 @@
 import { test, expect, beforeEach, vi } from "vitest";
 import { SCHEDULER_INTERVAL_SEC, createDom, registerHandlers } from "../src/ui/main-ui";
 import { ButtonsText, getButtonInUI, getEnumKeyValues, pauseMs } from "./test-utils";
+import * as functions from "../src/lib/utils/dispatched-functions";
+import { DispatchedFunctionResult } from "../src/types/dispatched-function";
 
 let appElem: HTMLElement;
 
@@ -61,4 +63,44 @@ test('enqueue -> queue length is 1 -> in console.log', () => {
 
     expect(spyOnConsoleLog).toBeCalledTimes(1);
     expect(spyOnConsoleLog).toBeCalledWith('taskQueue.length() : 1');
+});
+
+test('failure status is add --> failure to appear in the ui', async () => {
+    const spyOnAdd = vi.spyOn(functions, 'add');
+    const resFailure : DispatchedFunctionResult = {
+        status: "failure",
+        result: undefined
+    }
+    spyOnAdd.mockReturnValue(resFailure);
+    registerHandlers();
+
+    getButtonInUI(ButtonsText.EnqueueAdd)?.click();
+    getButtonInUI(ButtonsText.StartScheduler)!.click();
+
+    await pauseMs(SCHEDULER_INTERVAL_SEC * 1000 * 2);
+    expect(spyOnAdd).toBeCalledTimes(1);
+    expect(appElem.querySelector('output')!.textContent!.includes('failure')).toBeTruthy();
+});
+
+test('button isSchedulerStarted invoked --> console.error is called', () => {
+    const spyOnConsoleError = vi.spyOn(console, 'error');
+    getButtonInUI(ButtonsText.SchedulerRunning)?.click();
+
+    expect(spyOnConsoleError).toBeCalledTimes(1);
+});
+
+test('button enqueueGetPosts invoked --> console.error is called', () => {
+    const spyOnConsoleError = vi.spyOn(console, 'error');
+    getButtonInUI(ButtonsText.EnqueueGetPosts)?.click();
+
+    expect(spyOnConsoleError).toBeCalledTimes(1);
+});
+
+test('enqueue, start, stop --> output is empty', async () => {
+    getButtonInUI(ButtonsText.EnqueueAdd)?.click();
+    getButtonInUI(ButtonsText.StartScheduler)?.click();
+    getButtonInUI(ButtonsText.StopScheduler)?.click();
+
+    await pauseMs(SCHEDULER_INTERVAL_SEC * 1000 * 2);
+    expect(appElem.querySelector('output')!.textContent).toContain("");
 });
