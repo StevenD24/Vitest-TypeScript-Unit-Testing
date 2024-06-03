@@ -1,4 +1,4 @@
-import { test, expect, beforeEach } from "vitest";
+import { test, expect, beforeEach, vi } from "vitest";
 import { SCHEDULER_INTERVAL_SEC, createDom, registerHandlers } from "../src/ui/main-ui";
 import { ButtonsText, getButtonInUI, getEnumKeyValues, pauseMs } from "./test-utils";
 
@@ -52,4 +52,13 @@ test('click on add -> 3 appears in the output', async () => {
     const outputElem = appElem.querySelector('output');
     await pauseMs(SCHEDULER_INTERVAL_SEC*1000*2);
     expect(outputElem?.textContent?.includes('3')).toBeTruthy();
+});
+
+test('enqueue -> queue length is 1 -> in console.log', () => {
+    getButtonInUI(ButtonsText.EnqueueAdd)?.click();
+    const spyOnConsoleLog = vi.spyOn(console, 'log');
+    getButtonInUI(ButtonsText.QueueLength)?.click();
+
+    expect(spyOnConsoleLog).toBeCalledTimes(1);
+    expect(spyOnConsoleLog).toBeCalledWith('taskQueue.length() : 1');
 });
