@@ -3,7 +3,7 @@ import { SCHEDULER_INTERVAL_SEC, createDom, registerHandlers } from "../src/ui/m
 import { ButtonsText, getButtonInUI, getEnumKeyValues, pauseMs } from "./test-utils";
 import * as functions from "../src/lib/utils/dispatched-functions";
 import { DispatchedFunctionResult } from "../src/types/dispatched-function";
-import { getByRole } from '@testing-library/dom';
+import { getAllByRole, getByRole } from '@testing-library/dom';
 
 let appElem: HTMLElement;
 
@@ -21,25 +21,25 @@ test('document exists', () => {
 test("heading with text : 'Task Queue Manager' is in the dom", () => {
     const headingElem = getByRole(appElem, 'heading');
 
-    expect(headingElem).toBeTruthy();
+    expect(headingElem).toBeInTheDocument();
     expect(headingElem!.textContent).toBe('Task Queue Manager');
 });
 
 test('Six buttons inside the app id element', () => {
-    const buttonElems = appElem!.querySelectorAll('button');
+    const buttonElems = getAllByRole(appElem, 'button');
 
     expect(buttonElems.length).toBe(6);
 });
 
 test('The first button has correct text', () => {
-    const firstButton = appElem.querySelector('button');
+    const firstButton = getAllByRole(appElem, 'button')[0];
 
     expect(firstButton?.textContent).toBe('start scheduler');
 });
 
 test('all buttons have the correct text', () => {
     const arrayButtonsKeyValue = getEnumKeyValues(ButtonsText);
-    const buttons = appElem.querySelectorAll('button');
+    const buttons = getAllByRole(appElem, 'button');
 
     expect(arrayButtonsKeyValue.length).toBe(buttons.length);
 
