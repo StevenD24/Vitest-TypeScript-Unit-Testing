@@ -3,6 +3,7 @@ import { SCHEDULER_INTERVAL_SEC, createDom, registerHandlers } from "../src/ui/m
 import { ButtonsText, getButtonInUI, getEnumKeyValues, pauseMs } from "./test-utils";
 import * as functions from "../src/lib/utils/dispatched-functions";
 import { DispatchedFunctionResult } from "../src/types/dispatched-function";
+import { getByRole } from '@testing-library/dom';
 
 let appElem: HTMLElement;
 
@@ -17,11 +18,11 @@ test('document exists', () => {
     expect(document).toBeTruthy();
 });
 
-test("h1 with text : 'Task Queue Manager' is in the dom", () => {
-    const h1Elem = document.querySelector('h1');
+test("heading with text : 'Task Queue Manager' is in the dom", () => {
+    const headingElem = getByRole(appElem, 'heading');
 
-    expect(h1Elem).toBeTruthy();
-    expect(h1Elem!.textContent).toBe('Task Queue Manager');
+    expect(headingElem).toBeTruthy();
+    expect(headingElem!.textContent).toBe('Task Queue Manager');
 });
 
 test('Six buttons inside the app id element', () => {
@@ -104,3 +105,4 @@ test('enqueue, start, stop --> output is empty', async () => {
     await pauseMs(SCHEDULER_INTERVAL_SEC * 1000 * 2);
     expect(appElem.querySelector('output')!.textContent).toContain("");
 });
+
