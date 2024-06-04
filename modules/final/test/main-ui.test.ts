@@ -1,6 +1,6 @@
 import { test, expect, beforeEach, vi } from "vitest";
 import { SCHEDULER_INTERVAL_SEC, createDom, registerHandlers } from "../src/ui/main-ui";
-import { ButtonsText, getButtonInUI, getEnumKeyValues, pauseMs } from "./test-utils";
+import { ButtonsText, getButtonInUI, getEnumKeyValues } from "./test-utils";
 import * as functions from "../src/lib/utils/dispatched-functions";
 import { DispatchedFunctionResult } from "../src/types/dispatched-function";
 import { getAllByRole, getByRole, getByText, waitFor } from '@testing-library/dom';
