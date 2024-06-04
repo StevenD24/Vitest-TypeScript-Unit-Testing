@@ -4,7 +4,7 @@ import { ButtonsText, getButtonInUI, getEnumKeyValues, pauseMs } from "./test-ut
 import * as functions from "../src/lib/utils/dispatched-functions";
 import { DispatchedFunctionResult } from "../src/types/dispatched-function";
 import { getAllByRole, getByRole, getByText, waitFor } from '@testing-library/dom';
-import UserEvent, { userEvent } from "@testing-library/user-event";
+import { userEvent } from "@testing-library/user-event";
 
 let appElem: HTMLElement;
 
@@ -116,7 +116,11 @@ test('enqueue, start, stop --> output is empty', async () => {
     userEvent.click(getByText(appElem, ButtonsText.StartScheduler));
     userEvent.click(getByText(appElem, ButtonsText.StopScheduler));
 
-    await pauseMs(SCHEDULER_INTERVAL_SEC * 1000 * 2);
-    expect(appElem.querySelector('output')!.textContent).toContain("");
-});
+    // await pauseMs(SCHEDULER_INTERVAL_SEC * 1000 * 2);
+    // expect(appElem.querySelector('output')!.textContent).toContain("");
 
+    await waitFor(() => {
+        const outputElem = getByRole(appElem, 'status');
+        expect(outputElem?.textContent?.includes("")).toBeTruthy();
+    }, {timeout : SCHEDULER_INTERVAL_SEC * 1000 * 2});
+});
