@@ -3,7 +3,8 @@ import { SCHEDULER_INTERVAL_SEC, createDom, registerHandlers } from "../src/ui/m
 import { ButtonsText, getButtonInUI, getEnumKeyValues, pauseMs } from "./test-utils";
 import * as functions from "../src/lib/utils/dispatched-functions";
 import { DispatchedFunctionResult } from "../src/types/dispatched-function";
-import { getAllByRole, getByRole } from '@testing-library/dom';
+import { getAllByRole, getByRole, getByText, waitFor } from '@testing-library/dom';
+import UserEvent, { userEvent } from "@testing-library/user-event";
 
 let appElem: HTMLElement;
 
@@ -49,11 +50,20 @@ test('all buttons have the correct text', () => {
 });
 
 test('click on add -> 3 appears in the output', async () => {
-    getButtonInUI(ButtonsText.EnqueueAdd)!.click();
-    getButtonInUI(ButtonsText.StartScheduler)!.click();
+    // getButtonInUI(ButtonsText.EnqueueAdd)!.click();
+    userEvent.click(getByText(appElem, ButtonsText.EnqueueAdd));
+    // getButtonInUI(ButtonsText.StartScheduler)!.click();
+    userEvent.click(getByText(appElem, ButtonsText.StartScheduler));
 
-    const outputElem = appElem.querySelector('output');
-    await pauseMs(SCHEDULER_INTERVAL_SEC*1000*2);
+    // const outputElem = appElem.querySelector('output');
+    const outputElem = getByRole(appElem, 'status');
+    expect(outputElem).toBeInTheDocument();
+
+    // await pauseMs(SCHEDULER_INTERVAL_SEC*1000*2);
+    await waitFor(() => {
+        expect(outputElem?.textContent?.includes("3")).toBeTruthy();
+    }, {timeout : SCHEDULER_INTERVAL_SEC * 1000 * 2});
+
     expect(outputElem?.textContent?.includes('3')).toBeTruthy();
 });
 
@@ -75,10 +85,14 @@ test('failure status is add --> failure to appear in the ui', async () => {
     spyOnAdd.mockReturnValue(resFailure);
     registerHandlers();
 
-    getButtonInUI(ButtonsText.EnqueueAdd)?.click();
-    getButtonInUI(ButtonsText.StartScheduler)!.click();
+    userEvent.click(getByText(appElem, ButtonsText.EnqueueAdd));
+    userEvent.click(getByText(appElem, ButtonsText.StartScheduler));
 
-    await pauseMs(SCHEDULER_INTERVAL_SEC * 1000 * 2);
+    await waitFor(() => {
+        const outputElem = getByRole(appElem, 'status');
+        expect(outputElem!.textContent).toContain("failure");
+    }, { timeout: SCHEDULER_INTERVAL_SEC * 1000 * 2});
+
     expect(spyOnAdd).toBeCalledTimes(1);
     expect(appElem.querySelector('output')!.textContent!.includes('failure')).toBeTruthy();
 });
@@ -98,9 +112,9 @@ test('button enqueueGetPosts invoked --> console.error is called', () => {
 });
 
 test('enqueue, start, stop --> output is empty', async () => {
-    getButtonInUI(ButtonsText.EnqueueAdd)?.click();
-    getButtonInUI(ButtonsText.StartScheduler)?.click();
-    getButtonInUI(ButtonsText.StopScheduler)?.click();
+    userEvent.click(getByText(appElem, ButtonsText.EnqueueAdd));
+    userEvent.click(getByText(appElem, ButtonsText.StartScheduler));
+    userEvent.click(getByText(appElem, ButtonsText.StopScheduler));
 
     await pauseMs(SCHEDULER_INTERVAL_SEC * 1000 * 2);
     expect(appElem.querySelector('output')!.textContent).toContain("");
